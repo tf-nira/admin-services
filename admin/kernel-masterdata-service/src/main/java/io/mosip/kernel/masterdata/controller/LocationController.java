@@ -231,23 +231,6 @@ public class LocationController {
 	}
 
 	/**
-	 *
-	 * @param locationCode location code
-	 * @param languageCodes language codes
-	 * @return list of location hierarchies
-	 */
-	@ResponseFilter
-	@GetMapping(value = "/immediatechildren/{locationcode}")
-	public ResponseWrapper<LocationResponseDto> getImmediateChildrenByLocCode(
-			@PathVariable("locationcode") String locationCode, @RequestParam("languageCodes") List<String> languageCodes) {
-
-		ResponseWrapper<LocationResponseDto> responseWrapper = new ResponseWrapper<>();
-		responseWrapper
-				.setResponse(locationHierarchyService.getImmediateChildrenByLocCode(locationCode, languageCodes));
-		return responseWrapper;
-	}
-
-	/**
 	 * checks whether the given location name is valid or not
 	 * 
 	 * @param locationName
@@ -372,5 +355,26 @@ public class LocationController {
 		responseWrapper.setResponse(genericService.getMissingData(Location.class, langCode, "code", fieldName));
 		return responseWrapper;
 	}
+	
+
+/**
+	 *
+	 * @param locationCode location code
+	 * @param hierarchyName hierarchy name
+	 * @param langCode     language code
+	 * @return list of location hierarchies
+	 */
+	@ResponseFilter
+	//@PreAuthorize("hasAnyRole(@authorizedRoles.getGetlocationsimmediatechildrenlocationcodehierarchyNamelangcode())")
+	@GetMapping(value = "/immediatechildren/{locationcode}/{hierarchyName}/{langcode}")
+	public ResponseWrapper<LocationResponseDto> getImmediateChildrenByLocCodeAndHierarchyNameAndLangCode(
+			@PathVariable("locationcode") String locationCode, @PathVariable("hierarchyName") String hierarchyName, @PathVariable("langcode") String langCode) {
+
+		ResponseWrapper<LocationResponseDto> responseWrapper = new ResponseWrapper<>();
+		responseWrapper
+				.setResponse(locationHierarchyService.getImmediateChildrenByLocCodeAndHierarchyNameAndLangCode(locationCode, hierarchyName, langCode));
+		return responseWrapper;
+	}
+
 
 }

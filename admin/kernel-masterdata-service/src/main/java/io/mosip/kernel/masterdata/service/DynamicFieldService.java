@@ -16,6 +16,7 @@ import io.mosip.kernel.masterdata.dto.request.FilterValueDto;
 import io.mosip.kernel.masterdata.dto.request.SearchDto;
 import io.mosip.kernel.masterdata.dto.response.FilterResponseCodeDto;
 import io.mosip.kernel.masterdata.dto.response.PageResponseDto;
+import io.mosip.kernel.masterdata.entity.DynamicField;
 
 /**
  * Methods to create / update / inactivate / addValues dynamic field
@@ -82,5 +83,4 @@ public interface DynamicFieldService {
  	public DynamicFieldConsolidateResponseDto getDynamicFieldByNameAndLangcode(String fieldName,String langCode,boolean withValue);
 
 
-	List<DynamicFieldExtnDto> getAllDynamicFieldByName(String fieldName);
 }

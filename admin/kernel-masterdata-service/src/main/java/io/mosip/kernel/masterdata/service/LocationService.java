@@ -136,6 +136,14 @@ public interface LocationService {
 	public StatusResponseDto updateLocationStatus(String code, boolean isActive);
 
 	public FilterResponseCodeDto locFilterValues(FilterValueDto filterValueDto);
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @param locCode  - location code
+	 * @param hierarchyName - hierarchyName
+	 * @param langCode - language code
+	 * @return {@link LocationResponseDto}
+	 */
+	LocationResponseDto getImmediateChildrenByLocCodeAndHierarchyNameAndLangCode(String locCode, String hierarchyName, String langCode);
 
-    LocationResponseDto getImmediateChildrenByLocCode(String locationCode, List<String> languageCodes);
 }

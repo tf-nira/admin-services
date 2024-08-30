@@ -5,8 +5,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import io.mosip.kernel.masterdata.dto.response.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -956,14 +958,21 @@ public class LocationServiceImpl implements LocationService {
 		}
 		return filterResponseDto;
 	}
-
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see io.mosip.kernel.masterdata.service.LocationService#
+	 * getImmediateChildrenByLocCodeAndHierarchyNameAndLangCode(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Cacheable(value = "locations", key = "'location'.concat('-').concat('immediate').concat('-').concat(#locCode).concat('-').concat(#hierarchyName).concat('-').concat(#langCode)",
+			condition = "#locCode != null && #hierarchyName != null && #langCode != null")
 
 	@Override
-	public LocationResponseDto getImmediateChildrenByLocCode(String locationCode, List<String> languageCodes) {
+	public LocationResponseDto getImmediateChildrenByLocCodeAndHierarchyNameAndLangCode(String locCode, String hierarchyName, String langCode) {
 		List<Location> locationlist = null;
 		LocationResponseDto locationHierarchyResponseDto = new LocationResponseDto();
 		try {
-			locationlist = locationRepository.findLocationHierarchyByParentLocCode(locationCode, languageCodes);
+			locationlist = locationRepository.findLocationHierarchyByParentLocCodeAndHierarchyNameAndLanguageCode(locCode, hierarchyName, langCode);
 
 		} catch (DataAccessException | DataAccessLayerException e) {
 			throw new MasterDataServiceException(LocationErrorCode.LOCATION_FETCH_EXCEPTION.getErrorCode(),
