@@ -31,8 +31,9 @@ public class ApplicantValidDocumentController {
 	public ResponseWrapper<ApplicantValidDocumentDto> getApplicantValidDocument(@PathVariable String applicantId,
 			@RequestParam("languages") List<String> languages) {
 
+		String selectedApplicantId = applicantId.split(",")[0];
 		ResponseWrapper<ApplicantValidDocumentDto> responseWrapper = new ResponseWrapper<>();
-		responseWrapper.setResponse(applicantValidDocumentService.getDocumentCategoryAndTypes(applicantId, languages));
+		responseWrapper.setResponse(applicantValidDocumentService.getDocumentCategoryAndTypes(selectedApplicantId, languages));
 		return responseWrapper;
 	}
 
