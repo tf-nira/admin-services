@@ -521,7 +521,9 @@ public class DynamicFieldServiceImpl implements DynamicFieldService {
 
 				List<JSONObject> l = new ArrayList<>();
 				for (int i = 0; i < lst.size(); i++) {
-					l.add(new JSONObject(lst.get(i).getValueJson()));
+					if (lst.get(i).getIsActive() && lst.get(i).getValueJson() != null) {
+						l.add(new JSONObject(lst.get(i).getValueJson()));
+					}
 				}
 				dto.setJsonValues(new JSONArray(l));
 			}
