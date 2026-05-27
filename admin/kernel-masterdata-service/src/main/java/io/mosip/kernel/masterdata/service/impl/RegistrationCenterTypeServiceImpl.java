@@ -131,10 +131,11 @@ public class RegistrationCenterTypeServiceImpl implements RegistrationCenterType
 							ApplicationErrorCode.APPLICATION_INSERT_EXCEPTION.getErrorMessage()
 									+ ExceptionUtils.parseException(exception)),
 					"ADM-556");
-			throw new MasterDataServiceException(ApplicationErrorCode.APPLICATION_INSERT_EXCEPTION.getErrorCode(),
-					ApplicationErrorCode.APPLICATION_INSERT_EXCEPTION.getErrorMessage()
+			throw new MasterDataServiceException(
+					ApplicationErrorCode.DATA_ALREADY_EXIST_EXCEPTION.getErrorCode(),
+					ApplicationErrorCode.DATA_ALREADY_EXIST_EXCEPTION.getErrorMessage()
 							+ ExceptionUtils.parseException(exception));
-		}
+	}
 		CodeAndLanguageCodeID codeAndLanguageCodeID = new CodeAndLanguageCodeID();
 		MapperUtils.map(registrationCenterType, codeAndLanguageCodeID);
 		auditUtil.auditRequest(
