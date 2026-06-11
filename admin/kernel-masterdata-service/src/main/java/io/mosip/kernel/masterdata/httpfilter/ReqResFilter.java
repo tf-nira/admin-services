@@ -34,7 +34,8 @@ public class ReqResFilter implements Filter {
 		ContentCachingResponseWrapper responseWrapper = null;
 
 		try {
-			if (httpServletRequest.getRequestURI().endsWith(".stream")) {
+			String uri = httpServletRequest.getRequestURI();
+			if (uri.endsWith(".stream") || uri.contains("/download/bio-sdk")) {
 				chain.doFilter(request, response);
 				return;
 			}
