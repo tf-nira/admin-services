@@ -38,6 +38,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public LostRidResponseDto lostRid(SearchInfo searchInfo) {
+		LOGGER.info(searchInfo.toString());
 		LostRidResponseDto lostRidResponseDto = new LostRidResponseDto();
 		RegProcRequestWrapper<SearchInfo> procRequestWrapper = new RegProcRequestWrapper<>();
 		createLostRidRequest(searchInfo);
