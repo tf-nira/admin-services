@@ -17,6 +17,8 @@ import io.mosip.admin.packetstatusupdater.util.RestClient;
 import io.mosip.admin.service.AdminService;
 import io.mosip.kernel.core.util.DateUtils;
 
+import static io.swagger.v3.oas.integration.StringOpenApiConfigurationLoader.LOGGER;
+
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -47,7 +49,9 @@ public class AdminServiceImpl implements AdminService {
 		try {
 			String response = restClient.postApi(ApiName.LOST_RID_API, MediaType.APPLICATION_JSON,
 					procRequestWrapper, String.class);
+			LOGGER.info("LOST_RID_API Raw Response: {}", response);
 			lostRidResponseDto = objectMapper.readValue(response, LostRidResponseDto.class);
+			LOGGER.info("LOST_RID_API Parsed Response DTO: {}", lostRidResponseDto);
 		} catch (Exception e) {
 			throw new RequestException(LostRidErrorCode.UNABLE_TO_RETRIEVE_LOSTRID.getErrorCode(),
 					LostRidErrorCode.UNABLE_TO_RETRIEVE_LOSTRID.getErrorMessage()

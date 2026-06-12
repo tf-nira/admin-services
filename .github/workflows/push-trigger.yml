@@ -23,6 +23,7 @@ on:
       - tf_nira_dev
       - digital_card
       - MAmatch
+      - Devtest
 
 jobs:
   build-maven-admin-services:
