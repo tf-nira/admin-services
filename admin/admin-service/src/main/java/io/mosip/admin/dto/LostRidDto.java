@@ -12,6 +12,9 @@ public class LostRidDto {
 
 	private String registartionDate;
 
+	private String name;
+	private String surname;
+
 	Map<String, String> additionalInfo= new HashMap<>();
 
 	private String syncDateTime;
